@@ -1,0 +1,19 @@
+{
+  "name": "google-translator-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ltkhang/google-translator-js.git"
+  },
+  "author": "Andy Luong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ltkhang/google-translator-js/issues"
+  },
+  "homepage": "https://github.com/ltkhang/google-translator-js#readme"
+}

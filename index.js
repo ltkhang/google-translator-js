@@ -285,7 +285,7 @@ const supportedLanguages = {
 };
 
 async function _request({ src, dst, text }) {
-  const response = await fetch(`https://${Buffer.from('dHJhbnNsYXRlLmdvb2dsZWFwaXMuY29t', 'base64').toString('utf8')}/translate_a/single?client=gtx&sl=${src}&tl=${dst}&dt=t&dj=1&q=${text}`, {
+  const response = await fetch(`https://${Buffer.from('dHJhbnNsYXRlLmdvb2dsZWFwaXMuY29t', 'base64').toString('utf8')}/translate_a/single?client=gtx&sl=${src}&tl=${dst}&dt=t&dj=1&q=${encodeURIComponent(text)}`, {
     "headers": {
       "accept": "*/*",
     },
@@ -313,9 +313,17 @@ async function translate({ srcLangCode = 'auto', dstLangCode = 'auto', text = ''
   return _request({ src: srcLangCode, dst: dstLangCode, text });
 }
 
+function getTextToSpeechURL({ lang, text }) {
+  if (!supportedLanguages['sl'].hasOwnProperty(lang)) {
+    throw new UnsupportedLanguage('lang only supports languages in supportedLanguages.sl');
+  }
+  return `https://${Buffer.from('dHJhbnNsYXRlLmdvb2dsZWFwaXMuY29t', 'base64').toString('utf8')}/translate_tts?client=gtx&tl=${lang}&q=${encodeURIComponent(text)}`
+}
+
 module.exports = {
   supportedLanguages,
   translate,
+  getTextToSpeechURL,
   UnsupportedLanguage,
   TranslateError
 }
